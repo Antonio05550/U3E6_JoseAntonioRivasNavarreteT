@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class Lienzo extends View {
 
-    Image logo, cat, cat0, cat1, cat2, cat3, des, des0, des1, des2, des3;
+    Image logo, cat, cat0, cat1, cat2, cat3, des, des0, des1, des2, des3, b1,b11;
     MainActivity puntero;
     public Lienzo(Context context){
         super(context);
@@ -26,7 +26,8 @@ public class Lienzo extends View {
         des1 = new Image( R.drawable.tdes1,700,335,10,710,false,this,null);
         des2 = new Image( R.drawable.tdes2,700,335,10,710,false,this,null);
         des3 = new Image( R.drawable.tdes3,700,335,10,710,false,this,null);
-
+        b1 = new Image(R.drawable.bta,200,50,500,1030,false,this,null);
+        b11 = new Image(R.drawable.btv,200,50,500,1030,false,this,null);
 
     }
     @Override
@@ -57,7 +58,11 @@ public class Lienzo extends View {
         des1.pintar( c,p );
         des2.pintar( c,p );
         des3.pintar( c,p );
-
+        b11.pintar(c,p);
+        b11.texto(c,p,"Entrar",25,Color.WHITE,"centro");
+        b1.pintar(c,p);
+        b1.texto(c,p,"Entrar",25,Color.WHITE,"centro");
+        c.drawText("cat"+ puntero.cat,10,120,p);
 
     }
     public boolean onTouchEvent(MotionEvent e){
@@ -71,50 +76,60 @@ public class Lienzo extends View {
                     des1.visible( false );
                     des2.visible( false );
                     des3.visible( false );
+                    b1.visible(true);
+                    puntero.cat="cat0";
                 }
                 if (cat1.enArea( px,py )){
                     des0.visible( false );
                     des1.visible( true );
                     des2.visible( false );
                     des3.visible( false );
+                    b1.visible(true);
+                    puntero.cat="cat1";
                 }
                 if (cat2.enArea( px,py )){
                     des0.visible( false );
                     des1.visible( false );
                     des2.visible( true );
                     des3.visible( false );
+                    b1.visible(true);
+                    puntero.cat="cat2";
                 }
                 if (cat3.enArea( px,py )){
                     des0.visible( false );
                     des1.visible( false );
                     des2.visible( false );
                     des3.visible( true );
-            }
+                    b1.visible(true);
+                    puntero.cat="cat3";
+                }
+                if  (b1.enArea(px,py))
+                    puntero.ventana2();
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (cat0.enArea(px,py)){
-                    cat0.mover(px);
-                    cat1.mover(cat0.getX()+525);
-                    cat2.mover(cat1.getX()+525);
-                    cat3.mover(cat2.getX()+525);
+                    cat0.moverX(px);
+                    cat1.moverX(cat0.getX()+525);
+                    cat2.moverX(cat1.getX()+525);
+                    cat3.moverX(cat2.getX()+525);
                 }
                 if (cat1.enArea(px,py)){
-                    cat1.mover( px );
-                    cat0.mover(cat1.getX()-175);
-                    cat2.mover(cat1.getX()+525);
-                    cat3.mover(cat2.getX()+525);
+                    cat1.moverX( px );
+                    cat0.moverX(cat1.getX()-175);
+                    cat2.moverX(cat1.getX()+525);
+                    cat3.moverX(cat2.getX()+525);
                 }
                 if (cat2.enArea( px,py )){
-                    cat2.mover( px );
-                    cat1.mover( cat2.getX()-175);
-                    cat0.mover( cat1.getX()-175);
-                    cat3.mover(cat2.getX()+525);
+                    cat2.moverX( px );
+                    cat1.moverX( cat2.getX()-175);
+                    cat0.moverX( cat1.getX()-175);
+                    cat3.moverX(cat2.getX()+525);
                 }
                 if (cat3.enArea(px,py)){
-                    cat3.mover( px );
-                    cat2.mover(cat3.getX()-175);
-                    cat1.mover(cat2.getX()-525);
-                    cat0.mover(cat1.getX()-525);
+                    cat3.moverX( px );
+                    cat2.moverX(cat3.getX()-175);
+                    cat1.moverX(cat2.getX()-525);
+                    cat0.moverX(cat1.getX()-525);
                 }
                 break;
         }

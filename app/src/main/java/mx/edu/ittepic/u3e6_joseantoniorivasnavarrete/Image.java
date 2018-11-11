@@ -34,12 +34,15 @@ public class Image {
     }
     public boolean enArea(float px, float py) {
         if(!visible) return false;
-        if (py >= y && px>=x && px<= (x + imagen.getWidth()))
+        if (py >= y && py<=y+imagen.getHeight() && px>=x && px<= (x + imagen.getWidth()))
             return true;
         return false;
     }
-    public void mover(float px) {
+    public void moverX(float px) {
         x = px - (imagen.getWidth() / 2);
+    }
+    public void moverY(float py){
+        y = py - (imagen.getWidth() / 2);
     }
     public void visible(boolean v){
         visible = v;
@@ -48,4 +51,6 @@ public class Image {
     public float getX() {
         return x;
     }
+
+    public float getY() { return y; }
 }
